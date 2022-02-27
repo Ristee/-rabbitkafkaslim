@@ -9,3 +9,6 @@ ps:
 
 build:
 	docker-compose build
+
+frontend-shell:
+	docker-compose run --rm frontend-nodejs bash
