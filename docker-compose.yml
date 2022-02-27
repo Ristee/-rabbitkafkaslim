@@ -24,3 +24,12 @@ services:
             - ./api:/var/www/api
         ports:
             - "8081:80"
+
+    frontend-nodejs:
+        build:
+            context: ./frontend/docker
+            dockerfile: vue.docker
+        volumes:
+            - ./frontendcd ../:/app
+        ports:
+            - "8082:8080"
