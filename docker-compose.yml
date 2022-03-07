@@ -16,6 +16,13 @@ services:
         volumes:
             - ./api:/var/www/api
 
+    api-php-cli:
+        build:
+            context: ./api/docker
+            dockerfile: php-cli.docker
+        volumes:
+            - ./api:/var/www/api
+
     api-nginx:
         build:
             context: ./api/docker

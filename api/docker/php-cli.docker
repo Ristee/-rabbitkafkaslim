@@ -1,0 +1,9 @@
+FROM php:8.0.9-fpm
+
+RUN apt-get update && apt-get install -y libmcrypt-dev apt-utils libzip-dev zip wget \
+    && docker-php-ext-install zip \
+    && pecl install mcrypt-1.0.4
+
+RUN wget https://getcomposer.org/installer -O - -q | php -- --install-dir=/bin --filename=composer --quiet
+
+WORKDIR /var/www/api

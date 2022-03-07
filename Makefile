@@ -27,3 +27,9 @@ frontend-build:
 frontend-init:
 	@if [ ! -d frontend ]; then mkdir frontend && git clone ${FRONTEND_REPOSITORY} frontend; else echo "frontend folder already exists."; fi
 	@# TODO доделать init. Добавить развертывание фронта
+
+api-cli:
+	docker-compose run --rm api-php-cli $(COMMAND)
+
+api-shell:
+	docker-compose run --rm api-php-cli bash
