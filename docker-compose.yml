@@ -24,6 +24,8 @@ services:
             - ./api:/var/www/api
         ports:
             - "8081:80"
+        depends_on:
+            -   api-php-fpm
 
     frontend-nodejs:
         build:
