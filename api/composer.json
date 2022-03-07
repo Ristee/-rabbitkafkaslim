@@ -1,0 +1,13 @@
+{
+    "config": {
+        "sort-packages": true
+    },
+    "require": {
+        "php": ">=8.0",
+        "ext-json": "*",
+        "slim/slim": "^4.9"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-master"
+    }
+}
