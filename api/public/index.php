@@ -2,34 +2,25 @@
 
 declare(strict_types=1);
 
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Api\Http\Action;
+use Slim\Factory\AppFactory;
+use Symfony\Component\Dotenv\Dotenv;
 
 require '../vendor/autoload.php';
 
-$config = [
-    'settings' => [
-        'addContentLengthHeader' => false,
-    ]
-];
+$dotenv = new Dotenv();
+$dotenv->load(dirname(__DIR__).'/.env');
 
-$app = \Slim\Factory\AppFactory::create();
+
+$app = AppFactory::create();
+
 $app->addRoutingMiddleware();
-$app->addErrorMiddleware(true, true, true);
 
-$app->get('/', function(ServerRequestInterface $request, ResponseInterface $response) {
-    $data = [
-        'name' => 'App Api',
-        'version' => '1.0',
-    ];
+//$contentLengthMiddleware = new ContentLengthMiddleware();
+//$app->addMiddleware($contentLengthMiddleware);
 
-    $response = $response
-        ->withHeader('Content-Type', 'application/json');
+$app->addErrorMiddleware((bool)$_ENV['APP_DEBUG'], true, true);
 
-    $response->getBody()
-        ->write(json_encode($data));
-
-    return $response;
-});
+$app->get('/', [Action\HomeAction::class, 'index']);
 
 $app->run();
