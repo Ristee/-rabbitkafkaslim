@@ -7,7 +7,7 @@
         "ext-json": "*",
         "slim/psr7": "^1.5",
         "slim/slim": "^4.9",
-        "symfony/dotenv": "^6.0"
+        "vlucas/phpdotenv": "^5.4"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master"
