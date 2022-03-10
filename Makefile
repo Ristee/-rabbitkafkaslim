@@ -33,3 +33,9 @@ api-cli:
 
 api-shell:
 	docker-compose run --rm api-php-cli bash
+
+api-composer-install:
+	docker-compose run --rm api-php-cli composer install
+
+api-composer-update:
+	docker-compose run --rm api-php-cli composer update
