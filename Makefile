@@ -33,3 +33,6 @@ api-cli:
 
 api-shell:
 	docker-compose run --rm api-php-cli bash
+
+api-test:
+	docker-compose run --rm api-php-cli composer test
