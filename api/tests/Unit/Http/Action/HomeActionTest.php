@@ -1,28 +1,29 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Api\Test\Unit\Http\Action;
 
-use Api\Test\Feature\WebTestCase;
+use Api\Http\Action\HomeAction;
+use PHPUnit\Framework\TestCase;
+use Slim\Psr7\Factory\RequestFactory;
+use Slim\Psr7\Factory\ResponseFactory;
 
-class HomeActionTest extends WebTestCase
+class HomeActionTest extends TestCase
 {
     public function testSuccess(): void
     {
-        $request = $this->get('/');
+        $action = new HomeAction();
+        $request = (new RequestFactory())->createRequest('GET', '/');
+        $response = (new ResponseFactory())->createResponse();
 
-        $response = $this->request($request);
+        $action->index($request, $response);
 
         self::assertEquals(200, $response->getStatusCode());
-
-        $content = (string)$response->getBody();
-        self::assertJson($content);
+        self::assertJson($content = $response->getBody());
 
         $data = json_decode($content, true);
         self::assertEquals([
-           'name' => 'App Api',
-           'version' => '1.0',
+               'name' => 'App Api',
+               'version' => '1.0',
         ], $data);
     }
 }
