@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Api\Model\User\Entity\User;
 
+use JetBrains\PhpStorm\Pure;
 use Ramsey\Uuid\Uuid;
 use Webmozart\Assert\Assert;
 
@@ -27,5 +28,11 @@ class ConfirmToken
     public function isExpiredTo(\DateTimeImmutable $date): bool
     {
         return $this->expires <= $date;
+    }
+
+    #[Pure]
+    public function isEqualTo(string $token): bool
+    {
+        return $this->getToken() === $token;
     }
 }

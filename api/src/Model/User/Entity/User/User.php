@@ -15,7 +15,7 @@ class User
     private DateTimeInterface $date;
     private Email $email;
     private string $passwordHash;
-    private ConfirmToken $confirmToken;
+    private ?ConfirmToken $confirmToken;
     private string $status;
 
     /**
@@ -89,5 +89,23 @@ class User
     public function getHash(): string
     {
         return $this->passwordHash;
+    }
+
+    public function confirmSignup(string $token, \DateTimeImmutable $date)
+    {
+        if ($this->isActive()) {
+            throw new \DomainException('User is already active.');
+        }
+
+        if (!$this->confirmToken->isEqualTo($token)) {
+            throw new \DomainException('Confirm token is invalid.');
+        }
+
+        if ($this->confirmToken->isExpiredTo($date)) {
+            throw new \DomainException('Confirm token is expired.');
+        }
+
+        $this->status = self::STATUS_ACTIVE;
+        $this->confirmToken = null;
     }
 }
