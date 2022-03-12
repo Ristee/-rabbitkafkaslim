@@ -47,6 +47,9 @@ class WebTestCase extends TestCase
 
     protected function request(ServerRequestInterface $request): ResponseInterface
     {
-        return $this->app()->handle($request);
+        $response = $this->app()->handle($request);
+        $response->getBody()->rewind();
+
+        return $response;
     }
 }
