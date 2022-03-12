@@ -2,3 +2,4 @@ vendor
 .env
 .env.local
 .env.production
+.phpunit.result.cache
