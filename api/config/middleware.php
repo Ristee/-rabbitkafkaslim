@@ -9,7 +9,7 @@ return function(App $app) {
 //$app->addMiddleware($contentLengthMiddleware);
 
     $app->addErrorMiddleware(
-        filter_var($_ENV['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOLEAN),
+        filter_var($_ENV['APP_DEBUG'], FILTER_VALIDATE_BOOLEAN),
         true,
         true
     );
