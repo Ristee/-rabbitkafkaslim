@@ -3,3 +3,4 @@ vendor
 .env.local
 .env.production
 .phpunit.result.cache
+var

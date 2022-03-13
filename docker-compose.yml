@@ -18,6 +18,8 @@ services:
             - ./api/docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
         environment:
             PHP_IDE_CONFIG: "serverName=Docker"
+        depends_on:
+            - api-postgres
 
     api-php-cli:
         build:
@@ -28,6 +30,19 @@ services:
             - ./api/docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
         environment:
             PHP_IDE_CONFIG: "serverName=Docker"
+        depends_on:
+            - api-postgres
+
+    api-postgres:
+        image: postgres:9.6-alpine
+        volumes:
+            - ./api/var/docker/postgres:/var/lib/postgresql/data
+        environment:
+            - "POSTGRES_USER=api"
+            - "POSTGRES_PASSWORD=secret"
+            - "POSTGRES_DB=api"
+        ports:
+            - "54321:5432"
 
     api-nginx:
         build:
