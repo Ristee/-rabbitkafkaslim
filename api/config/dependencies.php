@@ -14,6 +14,7 @@ return function (ContainerBuilder $containerBuilder) {
             $config = Setup::createAnnotationMetadataConfiguration(
                 $doctrineSettings['metadata_dirs'],
                 $doctrineSettings['dev_mode'],
+                $doctrineSettings['cache_dir']
             );
 
             return EntityManager::create($doctrineSettings['connection'], $config);
