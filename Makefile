@@ -6,6 +6,8 @@ up:
 down:
 	docker-compose down --remove-orphans
 
+restart: down up
+
 ps:
 	docker-compose ps
 
