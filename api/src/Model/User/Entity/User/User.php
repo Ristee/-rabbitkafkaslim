@@ -76,9 +76,9 @@ class User
     }
 
     /**
-     * @return ConfirmToken
+     * @return ConfirmToken|null
      */
-    public function getToken(): ConfirmToken
+    public function getToken(): ?ConfirmToken
     {
         return $this->confirmToken;
     }
